@@ -56,7 +56,9 @@ class TestGoogleSearch():
         ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//ul[@aria-label='Select your ticket type.'][@role='listbox']//li[2]"))).click()
         
         #input number of customer
-
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='Hj7hq LLHSpd']"))).click()
+        ex_wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div[id='i5-2'] span[aria-live='polite']+ span"))).click()
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='IUKzPc']//button[@jsname='McfNlf']"))).click()
         #choose date
 
         #click search on how many stops
