@@ -37,7 +37,7 @@ class TestGoogleSearch():
                     place.click()
                     break # lam xong break lien
         time.sleep(2)
-        
+
         # input arrival
 
         # pickup way
