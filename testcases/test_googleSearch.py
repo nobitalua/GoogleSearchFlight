@@ -52,7 +52,9 @@ class TestGoogleSearch():
         time.sleep(2)
 
         # pickup way
-
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-hveid='CAEQBA']//div[@class='RLVa8 GeHXyb']"))).click()
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//ul[@aria-label='Select your ticket type.'][@role='listbox']//li[2]"))).click()
+        
         #input number of customer
 
         #choose date
