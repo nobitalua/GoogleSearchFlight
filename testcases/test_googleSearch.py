@@ -39,6 +39,17 @@ class TestGoogleSearch():
         time.sleep(2)
         
         # input arrival
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-placeholder= 'Where to?']//input[@placeholder='Where to?']"))).click()
+        time.sleep(3)
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-label='Enter your destination']//input"))).send_keys("Toro")
+        time.sleep(3)
+        list_arrival = ex_wait.until(EC.presence_of_all_elements_located((By.XPATH, "//ul[@class='DFGgtd']//li//div[@class='zsRT0d']")))
+        time.sleep(3)
+        for place in list_arrival:
+            if "Toronto Pearson International Airport" in place.text:
+                place.click()
+                break
+        time.sleep(2)
 
         # pickup way
 
