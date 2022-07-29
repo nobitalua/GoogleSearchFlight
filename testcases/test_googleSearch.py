@@ -26,6 +26,7 @@ class TestGoogleSearch():
         print(driver.title)
         ex_wait = WebDriverWait(driver, 20)
 
+
         #input departure
         ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@value='Calgary']"))).click()
         time.sleep(3)
@@ -37,6 +38,7 @@ class TestGoogleSearch():
                     place.click()
                     break # lam xong break lien
         time.sleep(2)
+
 
         # input arrival
         ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@aria-placeholder= 'Where to?']//input[@placeholder='Where to?']"))).click()
@@ -51,18 +53,62 @@ class TestGoogleSearch():
                 break
         time.sleep(2)
 
+
         # pickup way
         ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@data-hveid='CAEQBA']//div[@class='RLVa8 GeHXyb']"))).click()
         ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//ul[@aria-label='Select your ticket type.'][@role='listbox']//li[2]"))).click()
-        
+
+
         #input number of customer
         ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='Hj7hq LLHSpd']"))).click()
         ex_wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div[id='i5-2'] span[aria-live='polite']+ span"))).click()
         ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@class='IUKzPc']//button[@jsname='McfNlf']"))).click()
+
+
         #choose date
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@jsname='huwV5e']//input[@placeholder='Departure']"))).click()
+        all_dates = ex_wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='SJyhnc bVf6m']//div[@role='rowgroup']//div[@jsname='mG3Az']")))
+        for date in all_dates:
+            if date.get_attribute("data-iso") == "2022-09-26":
+                date.click()
+                break
+        ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//div[@jsname='WCieBd']//span[@jsname='V67aGc']"))).click()
+
 
         #click search on how many stops
+        ex_wait.until(EC.element_to_be_clickable(( By.XPATH, "//button[@aria-label= 'Stops, Not selected']"))).click()
+        time.sleep(3)
+        # 2 stop or a few
+        driver.find_element(By.XPATH, "//input[@aria-label='2 stops or fewer']").click()
+        time.sleep(2)
+        # Non-stop
+        driver.find_element(By.XPATH, "//input[@aria-label='Nonstop only']").click()
+        time.sleep(3)
+        # any stop
+        driver.find_element(By.XPATH, "//input[@aria-label='Any number of stops']").click()
+        time.sleep(3)
+        # 1 stop or a few
+        driver.find_element(By.XPATH, "//input[@aria-label='1 stop or fewer']").click()
+        time.sleep(3)
+        # clear on Stop
+        driver.find_element(By.XPATH, "//span[text()='Clear']").click()
+        time.sleep(2)
+        # close dialog tren stop
+        driver.find_element(By.XPATH, "//div[@jsname='M7dhxe']//button[@aria-label='Close dialog']").click()
+        time.sleep(2)
+
 
         #pay auto scroll
+        pagelength = driver.execute_script("window.scrollTo(0, document.body.scrollHeight); var pagelength = document.body.scrollHeight; return pagelength; ")
+        flag = False
+        while flag == False:
+            maxlength = pagelength
+            pagelength = driver.execute_script("window.scrollTo(0, document.body.scrollHeight); var pagelength = document.body.scrollHeight; return pagelength;")
+            if maxlength == pagelength:
+                flag = True
+
 
         #view more
+        more_flights = ex_wait.until(EC.element_to_be_clickable((By.XPATH, "//li[@class='ZVk93d']//button")))
+        more_flights.click()
+        time.sleep(10)
